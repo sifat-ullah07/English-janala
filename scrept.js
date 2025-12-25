@@ -4,16 +4,15 @@ const createElements = (arr) => {
     return (htmlElements.join(" "));
 };
 const manageSpinner = (ststus) => {
-    if(ststus == true){
-        document.getElementById("spinner").classList.remove("hidden")
-        document.getElementById("word-container").classList.add("hidden")
+    const manageSpinner = (status) => {  
+    if (status === true) {
+        document.getElementById("spinner").classList.remove("hidden");
+        document.getElementById("word-container").classList.add("hidden");
+    } else {
+        document.getElementById("word-container").classList.remove("hidden");
+        document.getElementById("spinner").classList.add("hidden");
     }
-    else{
-        document.getElementById("word-container").classList.remove("hidden")
-        document.getElementById("spinner").classList.add("hidden")
-
-    }
-    return;
+};
 
 
 }
@@ -137,7 +136,7 @@ const displayLevelWord = (words) => {
         const card = document.createElement('div')
         card.innerHTML = `        
         <div class="bg-white rounded-xl shadow-sm text-center py-10 px-5 space-y-4  h-[372px]>
-            <h2 class="text-2xl font-bold">${word.word ? word.word : "শব্দ পাওয়া যায়নি "}</h2>
+            <h2 class="text-3xl font-bold">${word.word ? word.word : "শব্দ পাওয়া যায়নি "}</h2>
             <p class="font-semibold">Meaning /Pronounciation</p>
             <div class="text-2xl font-medium font-bangla">"${word.meaning ? word.meaning : "অর্থ পাওয়া যায়নি" } / ${word.pronunciation ? word.pronunciation : ' pronunciation পাওয়া যায়নি ' }"</div>
             <div class="flex justify-between items-center">
@@ -149,7 +148,7 @@ const displayLevelWord = (words) => {
         wordContainer.append(card)
     });
     manageSpinner(false)
-    prevent
+    
 
 };
 const displayLesson = (lessons) => {
@@ -173,3 +172,32 @@ const displayLesson = (lessons) => {
     
 
 loadLessons()
+document.getElementById("btn-search").addEventListener("click", () => {
+    removeActive();
+
+    const input = document.getElementById("input-search")
+    const searchValu = input.value 
+    console.log(searchValu)
+    
+
+    fetch("https://openapi.programming-hero.com/api/words/all")
+    .then(response => response.json())
+    .then(data => {
+        allWords = data.data;
+        console.log(allWords);
+        const q = (searchValu || '').trim().toLowerCase();
+        const filterWords = allWords.filter(w => (w.word || w.text || '').toLowerCase().includes(q));
+        displayLevelWord(filterWords);
+    });
+
+    
+    // fetch("https://openapi.programming-hero.com/api/words/all")
+    // .then(response => response.json())
+    // .then(data => {
+    //     allWords = data.data;
+    //     console.log(allWords);
+    //     const filterWords = ;
+    // });
+    
+    
+});

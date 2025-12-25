@@ -94,12 +94,21 @@
         <div id="level-container" class="flex gap-5 flex-wrap justify-center"></div>
 
     </section>
+    <section class="flex justify-center mt-6">
+        <div class="flex justify-center my-8">
+           <div class="flex w-full max-w-md">
+              <input type="text" id="input-search" placeholder="Search Vocabulary..." class="input input-bordered w-full rounded-r-none"/>
+              <button id="btn-search" class="btn btn-primary rounded-l-none">Search</button>
+            </div>
+        </div>
+
+    </section>
     <section hidden id="spinner" class="flex justify-center items-center py-10">
         <span class="loading loading-bars loading-xl"></span>
     </section>
 
 
-    <section id="word-container" class="bg-gray-100 p-10 w-full mx auto my-10 grid grid-cols-3 gap-5">
+        <section id="word-container" class="bg-gray-100 p-10 w-full mx auto my-10 grid grid-cols-3 gap-5">
         <!-- <div class="bg-white rounded-xl shadow-sm text-center py-10 px-5 space-y-4">
 
             <h2 class="text-2xl font-bold">Eager</h2>
